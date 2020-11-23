@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
         field.returnKeyType = .continue
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.lightGray.cgColor
+        field.layer.borderColor = UIColor.systemGray.cgColor
         field.placeholder = "Email Address"
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         field.leftViewMode = .always
@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
         field.returnKeyType = .done
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.lightGray.cgColor
+        field.layer.borderColor = UIColor.systemGray.cgColor
         field.placeholder = "Password"
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         field.leftViewMode = .always
@@ -46,14 +46,15 @@ class LoginViewController: UIViewController {
         
     }()
     
-    private let loginButtion:UIButton = {
+    private let loginButton:UIButton = {
         let button = UIButton()
         button.setTitle("Log In", for: .normal)
-        button.backgroundColor = .link
-        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBackground
+        button.setTitleColor(.label, for: .normal)
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 1
         button.layer.masksToBounds = true
+        button.layer.borderColor = UIColor.systemRed.cgColor
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         
         return button
@@ -72,7 +73,7 @@ class LoginViewController: UIViewController {
         title = "Log In"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register", style: .done, target: self, action: #selector(didTapRegister))
         
-        loginButtion.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         emailField.delegate = self
         passwordField.delegate = self
         
@@ -81,18 +82,21 @@ class LoginViewController: UIViewController {
         scrollView.addSubview(imageView)
         scrollView.addSubview(emailField)
         scrollView.addSubview(passwordField)
-        scrollView.addSubview(loginButtion)
+        scrollView.addSubview(loginButton)
         
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeDown))
+        swipeDown.direction = .down
+        self.view.addGestureRecognizer(swipeDown)
         scrollView.frame = view.bounds
 
         let size = scrollView.width/3
         imageView.frame = CGRect(x: (view.width-size)/2,
-                                 y: 80,
+                                 y: 60,
                                  width: size,
                                  height: size)
         
@@ -104,7 +108,7 @@ class LoginViewController: UIViewController {
                                       y: emailField.bottom+10,
                                       width: scrollView.width-60,
                                       height: 52)
-        loginButtion.frame = CGRect(x: 30,
+        loginButton.frame = CGRect(x: 30,
                                           y: passwordField.bottom+10,
                                           width: scrollView.width-60,
                                           height: 52)
@@ -112,6 +116,8 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func loginButtonTapped(){
+        emailField.resignFirstResponder()
+        passwordField.resignFirstResponder()
         guard let email = emailField.text, let password = passwordField.text,
               !email.isEmpty, !password.isEmpty, password.count >= 6 else{
                 alertUserLoginError()
@@ -134,6 +140,10 @@ class LoginViewController: UIViewController {
         let vc = RegisterViewController()
         vc.title = "Create Account"
         navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc func respondToSwipeDown(){
+        emailField.resignFirstResponder()
+        passwordField.resignFirstResponder()
     }
 }
 
