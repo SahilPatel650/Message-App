@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7018BD5F7E4CF1D1499343ED /* Pods_Message_MessageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53AAB6364A1994FECDEF44E3 /* Pods_Message_MessageUITests.framework */; };
 		9AE2D0505ED9DEA1749BA4D4 /* Pods_MessageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 100A2867125AB34A68A7DD36 /* Pods_MessageTests.framework */; };
+		BA62401F256CDB2800592652 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA62401E256CDB2800592652 /* DatabaseManager.swift */; };
 		BAAD31FC256B5E9700F7CF8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD31FB256B5E9700F7CF8D /* AppDelegate.swift */; };
 		BAAD31FE256B5E9700F7CF8D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD31FD256B5E9700F7CF8D /* SceneDelegate.swift */; };
 		BAAD3200256B5E9700F7CF8D /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD31FF256B5E9700F7CF8D /* ConversationsViewController.swift */; };
@@ -25,7 +26,7 @@
 		BAAD3269256B6B9700F7CF8D /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD3268256B6B9700F7CF8D /* NewConversationViewController.swift */; };
 		BAAD326E256B6BAA00F7CF8D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD326D256B6BAA00F7CF8D /* ProfileViewController.swift */; };
 		BAAD327A256B770500F7CF8D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD3279256B770500F7CF8D /* Extensions.swift */; };
-		BAF4A2F0256C64210050450B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAF4A2EF256C64210050450B /* GoogleService-Info.plist */; };
+		BAF4A2F8256C6CC50050450B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAF4A2F7256C6CC50050450B /* GoogleService-Info.plist */; };
 		C756703808211F904B31C3CB /* Pods_Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F870E6881F20CF54921F9C70 /* Pods_Message.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		7D8381F8E8042B867A07BA20 /* Pods-Message.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Message.release.xcconfig"; path = "Target Support Files/Pods-Message/Pods-Message.release.xcconfig"; sourceTree = "<group>"; };
 		81A8F983CA544F2CDD187FF5 /* Pods-MessageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessageTests.debug.xcconfig"; path = "Target Support Files/Pods-MessageTests/Pods-MessageTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A4B49C9D75E411DA5AC961E5 /* Pods-Message.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Message.debug.xcconfig"; path = "Target Support Files/Pods-Message/Pods-Message.debug.xcconfig"; sourceTree = "<group>"; };
+		BA62401E256CDB2800592652 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		BAAD31F8256B5E9700F7CF8D /* Message.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Message.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAD31FB256B5E9700F7CF8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BAAD31FD256B5E9700F7CF8D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,7 +78,7 @@
 		BAAD3268256B6B9700F7CF8D /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 		BAAD326D256B6BAA00F7CF8D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BAAD3279256B770500F7CF8D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		BAF4A2EF256C64210050450B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BAF4A2F7256C6CC50050450B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F870E6881F20CF54921F9C70 /* Pods_Message.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Message.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA92BFD28D2C164781B25CC1 /* Pods-Message-MessageUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Message-MessageUITests.release.xcconfig"; path = "Target Support Files/Pods-Message-MessageUITests/Pods-Message-MessageUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,7 +146,7 @@
 		BAAD31FA256B5E9700F7CF8D /* Message */ = {
 			isa = PBXGroup;
 			children = (
-				BAF4A2EF256C64210050450B /* GoogleService-Info.plist */,
+				BAF4A2F7256C6CC50050450B /* GoogleService-Info.plist */,
 				BAAD3235256B660A00F7CF8D /* Resources */,
 				BAAD3234256B65F400F7CF8D /* ViewModels */,
 				BAAD3233256B65EA00F7CF8D /* Models */,
@@ -216,6 +218,7 @@
 				BAAD31FB256B5E9700F7CF8D /* AppDelegate.swift */,
 				BAAD31FD256B5E9700F7CF8D /* SceneDelegate.swift */,
 				BAAD3279256B770500F7CF8D /* Extensions.swift */,
+				BA62401E256CDB2800592652 /* DatabaseManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -360,7 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAAD320B256B5E9A00F7CF8D /* LaunchScreen.storyboard in Resources */,
-				BAF4A2F0256C64210050450B /* GoogleService-Info.plist in Resources */,
+				BAF4A2F8256C6CC50050450B /* GoogleService-Info.plist in Resources */,
 				BAAD3208256B5E9A00F7CF8D /* Assets.xcassets in Resources */,
 				BAAD3203256B5E9700F7CF8D /* Main.storyboard in Resources */,
 			);
@@ -498,6 +501,7 @@
 				BAAD325A256B6B3900F7CF8D /* RegisterViewController.swift in Sources */,
 				BAAD3264256B6B7300F7CF8D /* VideoPlayerViewController.swift in Sources */,
 				BAAD3269256B6B9700F7CF8D /* NewConversationViewController.swift in Sources */,
+				BA62401F256CDB2800592652 /* DatabaseManager.swift in Sources */,
 				BAAD3255256B6B2600F7CF8D /* LoginViewController.swift in Sources */,
 				BAAD327A256B770500F7CF8D /* Extensions.swift in Sources */,
 				BAAD31FE256B5E9700F7CF8D /* SceneDelegate.swift in Sources */,

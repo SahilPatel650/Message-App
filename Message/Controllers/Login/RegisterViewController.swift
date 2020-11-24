@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegisterViewController: UIViewController {
     private let scrollView: UIScrollView = {
@@ -21,7 +22,7 @@ class RegisterViewController: UIViewController {
         field.returnKeyType = .done
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.systemGray.cgColor
+        field.layer.borderColor = UIColor.label.cgColor
         field.placeholder = "Email Address"
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         field.leftViewMode = .always
@@ -34,7 +35,7 @@ class RegisterViewController: UIViewController {
         field.returnKeyType = .next
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.systemGray.cgColor
+        field.layer.borderColor = UIColor.label.cgColor
         field.placeholder = "First Name"
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         field.leftViewMode = .always
@@ -46,7 +47,7 @@ class RegisterViewController: UIViewController {
         field.returnKeyType = .next
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.systemGray.cgColor
+        field.layer.borderColor = UIColor.label.cgColor
         field.placeholder = "Last Name"
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         field.leftViewMode = .always
@@ -62,7 +63,7 @@ class RegisterViewController: UIViewController {
         field.returnKeyType = .next
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.systemGray.cgColor
+        field.layer.borderColor = UIColor.label.cgColor
         field.placeholder = "Password"
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         field.leftViewMode = .always
@@ -90,10 +91,10 @@ class RegisterViewController: UIViewController {
         imageView.image = UIImage(named: "add")
         let config = UIImage.SymbolConfiguration(weight: .ultraLight)
         imageView.preferredSymbolConfiguration = config
-        imageView.tintColor = .systemGray2
+        imageView.tintColor = .label
         imageView.contentMode = .scaleAspectFit
         imageView.layer.masksToBounds = true
-        imageView.layer.borderColor = UIColor.systemGray.cgColor
+        imageView.layer.borderColor = UIColor.label.cgColor
         return imageView
     }()
     
@@ -101,6 +102,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.systemBackground
         title = "Register"
+        
         
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeDown))
         swipeDown.direction = .down
@@ -168,10 +170,6 @@ class RegisterViewController: UIViewController {
     }
     
     @objc private func registerButtonTapped(){
-        emailField.resignFirstResponder()
-        passwordField.resignFirstResponder()
-        firstNameField.resignFirstResponder()
-        lastNameField.resignFirstResponder()
         
         guard let email = emailField.text,
               let password = passwordField.text,
@@ -186,6 +184,20 @@ class RegisterViewController: UIViewController {
             return
         }
         //firebase login!
+        
+        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] authResult, error in
+            guard let strongSelf = self else {
+                return
+            }
+            guard let result = authResult, error == nil else {
+                print("error creating user")
+                return
+            }
+            
+            let user = result.user
+            print("Created user, \(user)")
+            strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+        })
     }
     
     func alertUserLoginError() {
@@ -198,11 +210,11 @@ class RegisterViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    @objc private func didTapRegister(){
+    /*@objc private func didTapRegister(){
         let vc = RegisterViewController()
         vc.title = "Create Account"
         navigationController?.pushViewController(vc, animated: true)
-    }
+    }*/
     @objc private func respondToSwipeDown(){
         firstNameField.resignFirstResponder()
         lastNameField.resignFirstResponder()
@@ -213,19 +225,29 @@ class RegisterViewController: UIViewController {
 
 extension RegisterViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == firstNameField{
+        textField.resignFirstResponder()
+        
+        if textField == firstNameField {
             lastNameField.becomeFirstResponder()
+            print("done on first name")
         }
-        else if textField == lastNameField{
+        else if textField == lastNameField {
             passwordField.becomeFirstResponder()
+            print("done on last name")
+
         }
-        else if textField == passwordField{
+        else if textField == passwordField {
+            print("done on passowrd name")
+
             emailField.becomeFirstResponder()
         }
-        else{
-            didTapRegister()
+        else if textField == emailField {
+            print("done on email name")
+            registerButtonTapped()
         }
-        
+        else {
+            print ("I have no idea")
+        }
         return true
     }
 }
