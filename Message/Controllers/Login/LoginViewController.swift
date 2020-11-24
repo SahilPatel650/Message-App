@@ -132,6 +132,7 @@ class LoginViewController: UIViewController {
             }
             guard let result = authResult, error == nil else {
                 print("Failed to log in \(email)")
+                strongSelf.alertUserLoginError()
                 return
             }
             

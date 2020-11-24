@@ -180,29 +180,40 @@ class RegisterViewController: UIViewController {
               !firstName.isEmpty,
               !lastName.isEmpty,
               password.count >= 6 else{
-            alertUserLoginError()
+            alertUserRegisterError()
             return
         }
         //firebase login!
-        
-        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] authResult, error in
+        DatabaseManager.shared.userExists(with: email, completion: { [weak self] exsists in
             guard let strongSelf = self else {
                 return
             }
-            guard let result = authResult, error == nil else {
-                print("error creating user")
+            guard !exsists else {
+                //user already exists
+                strongSelf.alertUserRegisterError(message: "A user already exists with that email")
                 return
             }
-            
-            let user = result.user
-            print("Created user, \(user)")
-            strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: {authResult, error in
+                
+                guard authResult != nil, error == nil else {
+                    print("error creating user")
+                    strongSelf.alertUserRegisterError(message: "A user already exists with that email")
+                    return
+                }
+                
+                DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName,
+                                                                    lastName: lastName,
+                                                                    emailAddress: email))
+                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+            })
         })
+        
+        
     }
     
-    func alertUserLoginError() {
+    private func alertUserRegisterError(message: String = "Please enter all information") {
         let alert = UIAlertController(title: "Error",
-                                      message: "Enter all information",
+                                      message: message,
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss",
                                       style: .cancel,
