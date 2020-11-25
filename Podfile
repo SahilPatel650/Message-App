@@ -13,6 +13,8 @@ pod 'Firebase/Database'
 #facebook signin
 pod 'FBSDKLoginKit'
 
+#google signin
+pod 'GoogleSignIn'
 
 
   # Pods for Message
